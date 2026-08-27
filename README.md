@@ -146,7 +146,7 @@ http://127.0.0.1:5000
 ## 📸 Screenshots
 
 ### 🔐 Admin Login
-![Admin Login](screenshots/admin_login.png)
+![Admin Login](screenshots/admin_dashboard_login.png)
 
 ### 🧑‍💼 Admin Dashboard
 ![Admin Dashboard](screenshots/admin_dashboard1.png)
@@ -156,10 +156,11 @@ http://127.0.0.1:5000
 ![Student Login](screenshots/student_login.png)
 
 ### 📄 Student Result Page
-![Result Page](screenshots/result.png)
+![Result Page](screenshots/student's_result1.png)
+![Result Page](screenshots/students's_result2.png)
 
 ### 🧾 Result PDF Generation
-![Result PDF](screenshots/result_pdf.png)
+![Result PDF](screenshots/student's_result_pdf.png)
 
 ---
 ## 🔐 Security
