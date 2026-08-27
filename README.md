@@ -186,8 +186,8 @@ This project is intended as an academic/project implementation and does not curr
 
 **Vishal Sonkar**
 
- Bachelor of Technology (B.Tech)
- Department of Computer Science and Engineering
- National Institute of Technology Calicut
+Bachelor of Technology (B.Tech)
+Department of Computer Science and Engineering
+National Institute of Technology Calicut
 
 GitHub: https://github.com/vishal2313
