@@ -1,9 +1,6 @@
 # 🎓 Student Result Management System (SRMS)
 
-A web-based **Student Result Management System** built using **Flask, MySQL, HTML, CSS, and JavaScript**.
-
-The system provides an admin interface for managing students, subjects, and marks, and allows results to be viewed and downloaded as PDF reports.
-
+A full-stack Student Result Management System developed with Flask, MySQL, HTML, CSS, and JavaScript. The application provides an admin dashboard for managing student records, subjects, and marks, with RESTful APIs for backend operations, automated grade and percentage calculation, result retrieval by roll number, and PDF report generation.
 ---
 
 ## 🚀 Features
@@ -166,12 +163,12 @@ http://127.0.0.1:5000
 
 ---
 ## 🔐 Security
--Database credentials are stored using environment variables.
--.env is excluded from version control.
--Virtual environment files are excluded from version control.
--API input validation is implemented for major operations.
+- Database credentials are stored using environment variables.
+- .env is excluded from version control.
+- Virtual environment files are excluded from version control.
+- API input validation is implemented for major operations.
 
--This project is intended as an academic/project implementation and does not currently provide production-grade authentication or password hashing.
+This project is intended as an academic/project implementation and does not currently provide production-grade authentication or password hashing.
 
 ---
 ## 🔮 Future Improvements
@@ -189,8 +186,8 @@ http://127.0.0.1:5000
 
 **Vishal Sonkar**
 
-- Bachelor of Technology (B.Tech)
-- Department of Computer Science and Engineering
-- National Institute of Technology Calicut
+ Bachelor of Technology (B.Tech)
+ Department of Computer Science and Engineering
+ National Institute of Technology Calicut
 
 GitHub: https://github.com/vishal2313
