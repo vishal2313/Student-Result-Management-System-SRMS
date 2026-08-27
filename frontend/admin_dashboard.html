@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRMS | Admin Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-page">
+
+  <div class="dashboard-container">
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+      <div>
+        <div class="brand">SRMS</div>
+        <h1>Admin Dashboard</h1>
+        <p id="welcome"></p>
+      </div>
+
+    </header>
+
+
+    <!-- DASHBOARD SECTIONS -->
+    <main class="dashboard-grid">
+
+      <!-- STUDENTS -->
+      <section class="dashboard-card">
+        <div class="card-header">
+          <div class="card-icon">🎓</div>
+          <div>
+            <h2>Manage Students</h2>
+            <p>Add or update student information</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="s_roll">Roll Number</label>
+          <input id="s_roll" placeholder="Enter roll number">
+        </div>
+
+        <div class="form-group">
+          <label for="s_name">Student Name</label>
+          <input id="s_name" placeholder="Enter student name">
+        </div>
+
+        <div class="form-group">
+          <label for="s_semester">Semester</label>
+          <input id="s_semester" type="number" min="1" max="8" placeholder="Enter semester (1–8)">
+        </div>
+
+        <div class="form-group">
+          <label for="s_year">Academic Year</label>
+          <input id="s_year" placeholder="e.g. 2025-26">
+        </div>
+
+        <div class="button-group">
+          <button onclick="addStudent()">Add Student</button>
+          <button class="secondary-btn" onclick="editStudent()">Edit Student</button>
+        </div>
+      </section>
+
+
+      <!-- SUBJECTS -->
+      <section class="dashboard-card">
+        <div class="card-header">
+          <div class="card-icon">📚</div>
+          <div>
+            <h2>Manage Subjects</h2>
+            <p>Add or update subjects</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="edit_subject">Select an existing subject to edit</label>
+          <select id="edit_subject">
+            <option value="">Select Subject</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="subject_name">Subject Name</label>
+          <input id="subject_name" placeholder="Enter subject name">
+        </div>
+
+        <div class="button-group">
+          <button onclick="addSubject()">Add Subject</button>
+          <button class="secondary-btn" onclick="editSubject()">Edit Subject</button>
+        </div>
+
+      </section>
+
+
+      <!-- MARKS -->
+      <section class="dashboard-card">
+        <div class="card-header">
+          <div class="card-icon">📊</div>
+          <div>
+            <h2>Manage Marks</h2>
+            <p>Add or update student marks</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="m_roll">Roll Number</label>
+          <input id="m_roll" placeholder="Enter roll number">
+        </div>
+
+        <div class="form-group">
+          <label for="m_subject">Subject</label>
+          <select id="m_subject">
+            <option value="">Select Subject</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="m_marks">Marks</label>
+          <input id="m_marks" type="number" min="0" max="100" placeholder="Enter marks (0–100)">
+        </div>
+
+        <div class="button-group">
+          <button onclick="addMarks()">Add Marks</button>
+          <button class="secondary-btn" onclick="editMarks()">Edit Marks</button>
+        </div>
+
+
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <button class="logout-btn" onclick="logout()">Logout</button>
+
+  <script>
+    const email = localStorage.getItem("email");
+
+    if (!email) {
+      window.location.href = "login.html";
+    }
+
+    document.getElementById("welcome").innerText =
+      "Welcome back, " + email;
+
+
+    // ---------- LOAD SUBJECTS ----------
+    function loadSubjects() {
+      fetch("/subjects")
+        .then(res => res.json())
+        .then(data => {
+
+          const editSelect =
+            document.getElementById("edit_subject");
+
+          const marksSelect =
+            document.getElementById("m_subject");
+
+          // Reset dropdowns
+          editSelect.innerHTML =
+            '<option value="">Select Subject</option>';
+
+          marksSelect.innerHTML =
+            '<option value="">Select Subject</option>';
+
+          data.subjects.forEach(sub => {
+
+            // Edit Subject dropdown
+            const editOption =
+              document.createElement("option");
+
+            editOption.value = sub.id;
+
+            editOption.textContent =
+              `${sub.id} - ${sub.subject_name}`;
+
+            editSelect.appendChild(editOption);
+
+
+            // Marks dropdown
+            const marksOption =
+              document.createElement("option");
+
+            marksOption.value = sub.id;
+
+            marksOption.textContent =
+              `${sub.id} - ${sub.subject_name}`;
+
+            marksSelect.appendChild(marksOption);
+          });
+
+        })
+        .catch(() => {
+          alert("Unable to load subjects");
+        });
+    }
+
+    loadSubjects();
+
+
+    
+    function addStudent() {
+
+      if (!s_roll.value || !s_name.value ||
+        !s_semester.value || !s_year.value) {
+
+        alert("Please fill all student fields");
+        return;
+      }
+
+      fetch("/students", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roll_no: s_roll.value,
+          name: s_name.value,
+          semester: parseInt(s_semester.value),
+          academic_year: s_year.value
+        })
+      })
+        .then(r => r.json())
+        .then(d => {
+          alert(d.message || d.error);
+
+          if (d.message) {
+            s_roll.value = "";
+            s_name.value = "";
+            s_semester.value = "";
+            s_year.value = "";
+          }
+        })
+        .catch(() => {
+          alert("Server error while adding student");
+        });
+    }
+    // ---------- STUDENTS ----------
+    function editStudent() {
+
+      if (!s_roll.value || !s_name.value ||
+        !s_semester.value || !s_year.value) {
+
+        alert("Please fill all student fields");
+        return;
+      }
+
+      fetch("/students", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roll_no: s_roll.value,
+          name: s_name.value,
+          semester: parseInt(s_semester.value),
+          academic_year: s_year.value
+        })
+      })
+        .then(r => r.json())
+        .then(d => {
+          alert(d.message || d.error);
+
+          if (d.message) {
+            s_roll.value = "";
+            s_name.value = "";
+            s_semester.value = "";
+            s_year.value = "";
+          }
+        })
+        .catch(() => {
+          alert("Server error while updating student");
+        });
+    }
+
+    // ---------- SUBJECTS ----------
+
+    function addSubject() {
+      const subjectName = document.getElementById("subject_name").value.trim();
+
+      if (!subjectName) {
+        alert("Please enter subject name");
+        return;
+      }
+
+      fetch("/subjects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subject_name: subjectName
+        })
+      })
+        .then(r => r.json())
+        .then(d => {
+          alert(d.message || d.error);
+
+          if (d.message) {
+            document.getElementById("subject_name").value = "";
+            loadSubjects();
+          }
+        })
+        .catch(() => alert("Server error while adding subject"));
+    }
+
+
+    function editSubject() {
+      const subjectId = document.getElementById("edit_subject").value;
+      const subjectName = document.getElementById("subject_name").value.trim();
+
+      if (!subjectId) {
+        alert("Please select an existing subject to edit");
+        return;
+      }
+
+      if (!subjectName) {
+        alert("Please enter subject name");
+        return;
+      }
+
+      fetch("/subjects", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: parseInt(subjectId),
+          subject_name: subjectName
+        })
+      })
+        .then(r => r.json())
+        .then(d => {
+          alert(d.message || d.error);
+
+          if (d.message) {
+            document.getElementById("edit_subject").value = "";
+            document.getElementById("subject_name").value = "";
+            loadSubjects();
+          }
+        })
+        .catch(() => alert("Server error while updating subject"));
+    }
+    // ---------- MARKS ----------
+
+    function addMarks() {
+      if (!m_roll.value || !m_subject.value || !m_marks.value) {
+        alert("Please enter roll number, subject and marks");
+        return;
+      }
+
+      fetch("/marks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roll_no: m_roll.value,
+          subject_id: parseInt(m_subject.value),
+          marks: parseInt(m_marks.value)
+        })
+      })
+        .then(r => r.json())
+        .then(d => alert(d.message || d.error));
+    }
+
+    function editMarks() {
+      if (!m_roll.value || !m_subject.value || !m_marks.value) {
+        alert("Please enter roll number, subject and marks");
+        return;
+      }
+
+      fetch("/marks", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roll_no: m_roll.value,
+          subject_id: parseInt(m_subject.value),
+          marks: parseInt(m_marks.value)
+        })
+      })
+        .then(r => r.json())
+        .then(d => alert(d.message || d.error));
+    }
+
+
+    // ---------- LOGOUT ----------
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+
+</html>

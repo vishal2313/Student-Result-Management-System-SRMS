@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRMS | Admin Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="login-page">
+
+  <div class="login-wrapper">
+
+    <div class="login-card">
+
+      <div class="login-header">
+        <div class="login-logo">SRMS</div>
+        <h1>Welcome Back</h1>
+        <p>Sign in to access the admin panel</p>
+      </div>
+
+      <div class="login-form">
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="Enter your email">
+
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input id="password" type="password" placeholder="Enter your password">
+          <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+        </div>
+
+        <button class="login-btn" onclick="login()">Login</button>
+
+        <p id="msg" class="login-message"></p>
+
+      </div>
+
+      <div class="student-result-link">
+        <a href="result.html">View Student Result →</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const msg = document.getElementById("msg");
+
+      fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            msg.innerText = data.error;
+            msg.style.color = "#dc3545";
+          } else {
+            msg.innerText = "Login successful";
+            msg.style.color = "#198754";
+
+            localStorage.setItem("user_id", data.user_id);
+            localStorage.setItem("email", data.email);
+            localStorage.setItem("role", data.role);
+
+            setTimeout(() => {
+              window.location.href = "admin_dashboard.html";
+            }, 400);
+          }
+        })
+        .catch(() => {
+          msg.innerText = "Unable to connect to server";
+          msg.style.color = "#dc3545";
+        });
+    }
+
+    function togglePassword() {
+      const password = document.getElementById("password");
+      const toggle = document.querySelector(".toggle-password");
+
+      if (password.type === "password") {
+        password.type = "text";
+        toggle.innerText = "Hide";
+      } else {
+        password.type = "password";
+        toggle.innerText = "Show";
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>

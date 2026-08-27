@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SRMS Admin Panel</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Admin Panel</h2>
+
+  <!-- ADD STUDENT -->
+  <h3>Add Student</h3>
+  <input id="roll" placeholder="Roll Number">
+  <input id="name" placeholder="Student Name">
+  <button onclick="addStudent()">Add Student</button>
+  <p id="smsg"></p>
+
+  <!-- ADD MARKS -->
+  <h3>Add Marks</h3>
+  <input id="mroll" placeholder="Roll Number">
+  <input id="subject_id" placeholder="Subject ID">
+  <input id="marks" placeholder="Marks">
+  <button onclick="addMarks()">Add Marks</button>
+  <p id="mmsg"></p>
+
+</div>
+
+<script>
+/* ================= INPUTS ================= */
+const roll = document.getElementById("roll");
+const name = document.getElementById("name");
+
+const mroll = document.getElementById("mroll");
+const subject_id = document.getElementById("subject_id");
+const marks = document.getElementById("marks");
+
+/* ================= ADD STUDENT ================= */
+function addStudent() {
+  fetch("http://127.0.0.1:5000/students", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      roll_no: roll.value,
+      name: name.value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("smsg").innerText = data.message;
+    roll.value = "";
+    name.value = "";
+  })
+  .catch(() => {
+    document.getElementById("smsg").innerText = "Error adding student";
+  });
+}
+
+/* ================= ADD MARKS ================= */
+function addMarks() {
+  fetch("http://127.0.0.1:5000/marks", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      roll_no: mroll.value,
+      subject_id: Number(subject_id.value),
+      marks: Number(marks.value)
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("mmsg").innerText = data.message;
+    mroll.value = "";
+    subject_id.value = "";
+    marks.value = "";
+  })
+  .catch(() => {
+    document.getElementById("mmsg").innerText = "Error adding marks";
+  });
+}
+</script>
+
+</body>
+</html>

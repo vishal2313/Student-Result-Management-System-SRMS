@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Result | SRMS</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ---------- RESULT PAGE ---------- */
+
+    body {
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .result-page {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    /* ---------- HEADER ---------- */
+
+    .result-header {
+      margin-bottom: 25px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 58px;
+      height: 58px;
+
+      background: #087fef;
+      color: white;
+
+      border-radius: 15px;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      margin-bottom: 15px;
+    }
+
+    .result-header h1 {
+      margin: 0;
+      color: #16243a;
+      font-size: 34px;
+    }
+
+    .result-header p {
+      margin-top: 6px;
+      color: #66758a;
+      font-size: 16px;
+    }
+
+    /* ---------- CARD ---------- */
+
+    .result-card {
+      background: white;
+      padding: 30px;
+
+      border-radius: 18px;
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ---------- SEARCH ---------- */
+
+    .search-section {
+      margin-bottom: 25px;
+    }
+
+    .search-section label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #26364d;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .search-row input {
+      flex: 1;
+      margin-top: 0;
+    }
+
+    .search-row button {
+      width: 180px;
+      margin-top: 0;
+    }
+
+    /* ---------- MESSAGE ---------- */
+
+    #msg {
+      margin: 15px 0;
+      font-weight: 500;
+    }
+
+    /* ---------- STUDENT INFO ---------- */
+
+    .student-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 15px;
+
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
+    .info-box {
+      background: #f7f9fc;
+
+      padding: 15px 18px;
+
+      border-radius: 10px;
+
+      border: 1px solid #e5eaf0;
+    }
+
+    .info-label {
+      display: block;
+
+      font-size: 13px;
+      color: #718096;
+
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    /* ---------- TABLE ---------- */
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #26364d;
+      font-weight: 600;
+    }
+
+    th,
+    td {
+      padding: 14px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    /* ---------- SUMMARY ---------- */
+
+    .result-summary {
+      display: flex;
+      justify-content: flex-end;
+      gap: 35px;
+
+      margin-top: 25px;
+      padding: 20px;
+
+      background: #f7f9fc;
+
+      border-radius: 10px;
+    }
+
+    .summary-item {
+      text-align: right;
+    }
+
+    .summary-label {
+      display: block;
+      color: #718096;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .summary-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #16243a;
+    }
+
+    /* ---------- ACTIONS ---------- */
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+
+      margin-top: 25px;
+    }
+
+    .actions button {
+      width: auto;
+      min-width: 170px;
+      margin-top: 0;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+    }
+
+    .logout-btn:hover {
+      background: #b02a37;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 650px) {
+
+      body {
+        padding: 20px 12px;
+      }
+
+      .result-card {
+        padding: 20px;
+      }
+
+      .search-row {
+        flex-direction: column;
+      }
+
+      .search-row button {
+        width: 100%;
+      }
+
+      .student-info {
+        grid-template-columns: 1fr;
+      }
+
+      .result-summary {
+        justify-content: space-between;
+        gap: 15px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="result-page">
+
+    <!-- HEADER -->
+    <header class="result-header">
+      <div class="brand">SRMS</div>
+
+      <h1>Student Result</h1>
+      <p>View academic performance and download result report</p>
+    </header>
+
+
+    <!-- RESULT CARD -->
+    <div class="result-card">
+
+      <!-- SEARCH -->
+      <div class="search-section">
+
+        <label for="roll">Roll Number</label>
+
+        <div class="search-row">
+          <input id="roll" placeholder="Enter roll number">
+
+          <button onclick="getResult()">
+            View Result
+          </button>
+        </div>
+
+      </div>
+
+      <p id="msg"></p>
+
+
+      <!-- RESULT -->
+      <div id="result" style="display:none;">
+
+        <!-- STUDENT INFORMATION -->
+        <div class="student-info">
+
+          <div class="info-box">
+            <span class="info-label">Student Name</span>
+            <span class="info-value" id="studentName"></span>
+          </div>
+
+          <div class="info-box">
+            <span class="info-label">Roll Number</span>
+            <span class="info-value" id="studentRoll"></span>
+          </div>
+
+          <div class="info-box">
+            <span class="info-label">Semester</span>
+            <span class="info-value" id="semester"></span>
+          </div>
+
+          <div class="info-box">
+            <span class="info-label">Academic Year</span>
+            <span class="info-value" id="academicYear"></span>
+          </div>
+
+        </div>
+
+
+        <!-- MARKS TABLE -->
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+
+            <tbody id="marksTable"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+        <div class="result-summary">
+
+          <div class="summary-item">
+            <span class="summary-label">Total Marks</span>
+            <span class="summary-value" id="total"></span>
+          </div>
+
+          <div class="summary-item">
+            <span class="summary-label">Percentage</span>
+            <span class="summary-value">
+              <span id="percentage"></span>%
+            </span>
+          </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+        <div class="actions">
+
+          <button onclick="downloadPDF()">
+            Download PDF
+          </button>
+
+          <button class="logout-btn" onclick="logout()">
+            Logout
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function calculateGrade(marks) {
+
+      if (marks >= 90) return "A+";
+      if (marks >= 80) return "A";
+      if (marks >= 70) return "B";
+      if (marks >= 60) return "C";
+      if (marks >= 50) return "D";
+      if (marks >= 40) return "E";
+
+      return "Fail";
+    }
+
+
+    function getResult() {
+
+      const roll =
+        document.getElementById("roll").value.trim();
+
+      const msg =
+        document.getElementById("msg");
+
+      const resultDiv =
+        document.getElementById("result");
+
+
+      if (!roll) {
+
+        msg.innerText =
+          "Please enter roll number";
+
+        msg.style.color = "red";
+
+        resultDiv.style.display = "none";
+
+        return;
+      }
+
+
+      fetch("http://127.0.0.1:5000/result/" + roll)
+        .then(async res => {
+          const data = await res.json();
+
+          if (!res.ok) {
+            throw new Error(data.error || "Server error");
+          }
+
+          return data;
+        })
+        .then(data => {
+
+          msg.innerText = "";
+          resultDiv.style.display = "block";
+
+          document.getElementById("studentName").innerText = data.name;
+          document.getElementById("studentRoll").innerText = data.roll_no;
+          document.getElementById("semester").innerText = data.semester;
+          document.getElementById("academicYear").innerText = data.academic_year;
+
+          const table = document.getElementById("marksTable");
+          table.innerHTML = "";
+
+          data.subjects.forEach(s => {
+            const grade = calculateGrade(s.marks);
+
+            table.innerHTML += `
+        <tr>
+          <td>${s.subject_name}</td>
+          <td>${s.marks}</td>
+          <td>${grade}</td>
+        </tr>
+      `;
+          });
+
+          document.getElementById("total").innerText = data.total;
+          document.getElementById("percentage").innerText = data.percentage;
+        })
+        .catch(error => {
+
+          resultDiv.style.display = "none";
+
+          msg.innerText = error.message;
+          msg.style.color = "red";
+
+        });
+    }
+
+    function downloadPDF() {
+
+      const roll =
+        document.getElementById("roll").value.trim();
+
+      if (!roll) {
+        return;
+      }
+
+      window.open(
+        `/result_pdf/${roll}`,
+        "_blank"
+      );
+
+    }
+
+
+    function logout() {
+
+      localStorage.clear();
+
+      window.location.href =
+        "login.html";
+
+    }
+
+  </script>
+
+</body>
+
+</html>

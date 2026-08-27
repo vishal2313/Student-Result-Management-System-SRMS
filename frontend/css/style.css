@@ -1,0 +1,476 @@
+/* -------- GLOBAL -------- */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #f9fbfd);
+  padding: 40px;
+  margin: 0;
+}
+
+h2,
+h3 {
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* -------- CONTAINER -------- */
+.container {
+  background: white;
+  padding: 30px;
+  max-width: 520px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-in;
+}
+
+/* -------- SECTIONS (Admin Dashboard) -------- */
+.section {
+  margin-top: 25px;
+}
+
+/* Extra space before logout */
+.section:last-of-type {
+  margin-bottom: 30px;
+
+}
+
+/* -------- INPUTS -------- */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* -------- BUTTONS (DEFAULT / PRIMARY) -------- */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.1s;
+}
+
+button:hover {
+  background: #0056b3;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* -------- LOGOUT BUTTON (DANGER) -------- */
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  width: 180px;
+  margin: -60px 50px 0 auto;
+  display: block;
+}
+
+.logout-btn:hover {
+  background: #b02a37;
+}
+
+/* -------- LISTS -------- */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f1f3f5;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* -------- MESSAGES -------- */
+.success {
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.error {
+  color: #c62828;
+  font-weight: 500;
+}
+
+/* -------- TABLE (RESULT PAGE) -------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #f4f6f8;
+  font-weight: 600;
+}
+
+/* -------- ANIMATION -------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= LOGIN PAGE ================= */
+
+.login-page {
+  min-height: 100vh;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eef4ff, #f8fafc);
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 440px;
+  padding: 20px;
+}
+
+.login-card {
+  background: #ffffff;
+  padding: 42px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #007bff;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.login-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.login-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.login-form label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.login-form input {
+  box-sizing: border-box;
+  margin-top: 0;
+  height: 48px;
+}
+
+.login-btn {
+  margin-top: 24px;
+  height: 48px;
+  background: #007bff;
+  border-radius: 8px;
+}
+
+.login-btn:hover {
+  background: #0069d9;
+}
+
+.login-message {
+  min-height: 20px;
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.student-result-link {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.student-result-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.student-result-link a:hover {
+  text-decoration: underline;
+}
+
+/* ================= ADMIN DASHBOARD ================= */
+
+.dashboard-page {
+  min-height: 100vh;
+  padding: 35px;
+  box-sizing: border-box;
+}
+
+.dashboard-container {
+  max-width: 1150px;
+  margin: auto;
+}
+
+/* Header */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #007bff;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 30px;
+  color: #1f2937;
+}
+
+.dashboard-header p {
+  margin: 7px 0 0;
+  color: #6b7280;
+}
+
+/* Logout */
+
+.dashboard-header .logout-btn {
+  width: auto;
+  padding: 11px 22px;
+  margin: 0;
+}
+
+/* Grid */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Cards */
+
+.dashboard-card {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  border: 1px solid #edf0f3;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: #eaf3ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.card-header p {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Forms */
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Buttons */
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button-group button {
+  margin: 0;
+}
+
+.secondary-btn {
+  background: #eef2f7;
+  color: #374151;
+}
+
+.secondary-btn:hover {
+  background: #dfe5ec;
+  color: #1f2937;
+  box-shadow: none;
+}
+
+
+/* Responsive */
+
+@media (max-width: 800px) {
+
+  .dashboard-page {
+    padding: 20px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 25px;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .dashboard-header {
+    flex-direction: column;
+  }
+
+  .dashboard-header .logout-btn {
+    width: 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 70px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: auto;
+  margin: 0;
+  padding: 5px 8px;
+
+  background: transparent;
+  color: #007bff;
+
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.toggle-password:hover {
+  background: transparent;
+  color: #0056b3;
+  box-shadow: none;
+}
+
+.toggle-password:active {
+  transform: translateY(-50%);
+}

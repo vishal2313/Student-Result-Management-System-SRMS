@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Flask
+instance/
+
+# OS / Editor
+.DS_Store
+.vscode/
+
+# Backup files
+*.bak
