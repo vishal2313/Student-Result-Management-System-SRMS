@@ -125,16 +125,17 @@ DB_PASSWORD=your_db_password
 DB_HOST=127.0.0.1
 DB_NAME=srms
 DB_PORT=3306
-
-Never commit your .env file. It is excluded through .gitignore.
 ```
+Never commit your .env file. It is excluded through .gitignore.
+
 ### 5️⃣ Set up the MySQL database
 
 Create a MySQL database named:
 ```text
 CREATE DATABASE srms;
-Create the required tables according to the database schema used by the application.
 ```
+Create the required tables according to the database schema used by the application.
+
 ### 6️⃣ Run the application
 ```text
 python app.py
@@ -174,22 +175,22 @@ http://127.0.0.1:5000
 
 ---
 ## 🔮 Future Improvements
--Password hashing
--JWT/session-based authentication
--Student login portal
--Student search and management tables
--Better role-based access control
--Cloud deployment
--Improved database schema and validation
--Responsive mobile interface
+- Password hashing
+- JWT/session-based authentication
+- Student login portal
+- Student search and management tables
+- Better role-based access control
+- Cloud deployment
+- Improved database schema and validation
+- Responsive mobile interface
 
 ---
 ## 👤 Author
 
-** Vishal Sonkar**
+**Vishal Sonkar**
 
-Bachelor of Technology (B.Tech)
-Department of Computer Science and Engineering
-National Institute of Technology Calicut
+- Bachelor of Technology (B.Tech)
+- Department of Computer Science and Engineering
+- National Institute of Technology Calicut
 
 GitHub: https://github.com/vishal2313
