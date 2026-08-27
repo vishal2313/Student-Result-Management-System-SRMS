@@ -156,11 +156,14 @@ http://127.0.0.1:5000
 ![Student Login](screenshots/student_login.png)
 
 ### 📄 Student Result Page
-![Result Page](screenshots/student's_result1.png)
-![Result Page](screenshots/students's_result2.png)
+
+![Result Page](screenshots/student's%20_result1.png)
+
+![Result Page](screenshots/student's_result2.png)
 
 ### 🧾 Result PDF Generation
-![Result PDF](screenshots/student's_result_pdf.png)
+
+![Result PDF](screenshots/student's_result%20_pdf.png)
 
 ---
 ## 🔐 Security
