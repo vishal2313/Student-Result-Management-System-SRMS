@@ -1,6 +1,6 @@
 # 🎓 Student Result Management System (SRMS)
-
 A full-stack Student Result Management System developed with Flask, MySQL, HTML, CSS, and JavaScript. The application provides an admin dashboard for managing student records, subjects, and marks, with RESTful APIs for backend operations, automated grade and percentage calculation, result retrieval by roll number, and PDF report generation.
+
 ---
 
 ## 🚀 Features
