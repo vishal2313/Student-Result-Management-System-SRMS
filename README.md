@@ -100,24 +100,26 @@ Student-Result-Management-System-SRMS/
 
 ### 1️⃣ Clone the repository
 
-```bash
+```text
 git clone https://github.com/vishal2313/Student-Result-Management-System-SRMS.git
 cd Student-Result-Management-System-SRMS
+```
 
 ### 2️⃣ Create a virtual environment
-```bash
+```text
 python3 -m venv venv
 source venv/bin/activate
-
+```
 
 ### 3️⃣ Install dependencies
-```bash
+```text
 pip install -r requirements.txt
+```
 
 ### 4️⃣ Configure environment variables
 
 Create a .env file in the project root:
-```bash
+```text
 DB_USER=your_db_user
 DB_PASSWORD=your_db_password
 DB_HOST=127.0.0.1
@@ -125,24 +127,24 @@ DB_NAME=srms
 DB_PORT=3306
 
 Never commit your .env file. It is excluded through .gitignore.
-
+```
 ### 5️⃣ Set up the MySQL database
 
 Create a MySQL database named:
-```bash
+```text
 CREATE DATABASE srms;
-
 Create the required tables according to the database schema used by the application.
-
+```
 ### 6️⃣ Run the application
-```bash
+```text
 python app.py
+```
 
 Open the application in your browser:
-```bash 
+```text 
 http://127.0.0.1:5000
-
-
+```
+---
 ## 📸 Screenshots
 
 ### 🔐 Admin Login
@@ -181,6 +183,7 @@ http://127.0.0.1:5000
 -Improved database schema and validation
 -Responsive mobile interface
 
+---
 ## 👤 Author
 
 ** Vishal Sonkar**
