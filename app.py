@@ -300,38 +300,70 @@ def edit_marks():
 
 # ================= RESULT =================
 
+# ================= RESULT =================
+
 @app.route("/result/<roll_no>")
 def get_result(roll_no):
+
     db = get_db()
     cursor = db.cursor(dictionary=True)
+
+    # ---------- CHECK STUDENT ----------
     cursor.execute("""
-        SELECT s.roll_no, s.name, s.semester, s.academic_year,
-               sub.subject_name, m.marks
-        FROM students s
-        JOIN marks m ON s.roll_no = m.roll_no
-        JOIN subjects sub ON m.subject_id = sub.id
-        WHERE s.roll_no=%s
+        SELECT roll_no, name, semester, academic_year
+        FROM students
+        WHERE roll_no=%s
     """, (roll_no,))
-    rows = cursor.fetchall()
+
+    student = cursor.fetchone()
+
+    if not student:
+        cursor.close()
+        db.close()
+        return jsonify({"error": "Invalid roll number"}), 404
+
+    # ---------- GET MARKS ----------
+    cursor.execute("""
+        SELECT sub.subject_name, m.marks
+        FROM marks m
+        JOIN subjects sub ON m.subject_id = sub.id
+        WHERE m.roll_no=%s
+    """, (roll_no,))
+
+    marks = cursor.fetchall()
+
     cursor.close()
     db.close()
-    
-    if not rows:
-     return jsonify({"error": "Invalid roll number"}), 404
- 
-    total = sum(r["marks"] for r in rows)
-    percentage = (total / (len(rows) * 100)) * 100
+
+    # ---------- STUDENT EXISTS BUT NO MARKS ----------
+    if not marks:
+        return jsonify({
+            "error": "No result record found for this roll number"
+        }), 404
+
+    # ---------- CALCULATIONS ----------
+    total = sum(r["marks"] for r in marks)
+    percentage = (total / (len(marks) * 100)) * 100
+
+    # ---------- RESPONSE ----------
+    subjects = [
+        {
+            "subject_name": r["subject_name"],
+            "marks": r["marks"]
+        }
+        for r in marks
+    ]
 
     return jsonify({
-        "roll_no": rows[0]["roll_no"],
-        "name": rows[0]["name"],
-        "semester": rows[0]["semester"],
-        "academic_year": rows[0]["academic_year"],
-        "subjects": rows,
+        "roll_no": student["roll_no"],
+        "name": student["name"],
+        "semester": student["semester"],
+        "academic_year": student["academic_year"],
+        "subjects": subjects,
         "total": total,
         "percentage": round(percentage, 2)
     })
-
+    
 # ================= RESULT PDF =================
 
 @app.route("/result_pdf/<roll_no>")
